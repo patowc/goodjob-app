@@ -45,17 +45,27 @@ func hello(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		log.Fatalf("error on HEAD request: %s", err.Error())
+		fmt.Fprintf(w, "ERROR solicitando el fichero.\n")
+		return
 	}
 
-	fmt.Printf("Content-Length: %d \n", resp.ContentLength)
+	contentLen := resp.ContentLength
+	evaluated := contentLen/1024
+
+	fmt.Printf("Content-Length: %d \n", contentLen)
 
 	log.Printf("Serving request: %s", r.URL.Path)
 	host, _ := os.Hostname()
-	fmt.Fprintf(w, "Hola, Goodjob dice que el valor que necesitas es: !\n")
-	fmt.Fprintf(w, "FICHERO: %s!\n", fichero)
-	fmt.Fprintf(w, "FICHERO content-Length: %d \n", resp.ContentLength)
+	fmt.Fprintf(w, "Hola, Goodjob dice que estos son los datos que has pasado:\n")
+	fmt.Fprintf(w, "=============================================================================\n")
+	fmt.Fprintf(w, "FICHERO: %s\n", fichero)
+	fmt.Fprintf(w, "FICHERO content-Length: %d \n", contentLen)
 	fmt.Fprintf(w, "Version: 6.6.6\n")
 	fmt.Fprintf(w, "Hostname: %s\n", host)
+	fmt.Fprintf(w, "=============================================================================\n")
+	fmt.Fprintf(w, "Debes ir a la app en Heroku y pasarle los siguientes datos:\n")
+	fmt.Fprintf(w, "NOMBRE FICHERO: %s\n", fichero)
+	fmt.Fprintf(w, "RESULTADO: %s\n", evaluated)
 }
 
 // [END container_goodjob_app]
