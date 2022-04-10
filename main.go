@@ -65,7 +65,7 @@ func hello(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "=============================================================================\n")
 	fmt.Fprintf(w, "Debes ir a la app en Heroku y pasarle los siguientes datos:\n")
 	fmt.Fprintf(w, "NOMBRE FICHERO: %s\n", fichero)
-	fmt.Fprintf(w, "RESULTADO: %s\n", evaluated)
+	fmt.Fprintf(w, "RESULTADO: %d\n", evaluated)
 }
 
 // [END container_goodjob_app]
