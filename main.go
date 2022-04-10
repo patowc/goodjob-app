@@ -40,10 +40,20 @@ func hello(w http.ResponseWriter, r *http.Request) {
 
 	fichero := parm_list[0]
 
+	httpClient := &http.Client{Timeout: 5 * time.Second}
+	resp, err := httpClient.Head(url)
+
+	if err != nil {
+		log.Fatalf("error on HEAD request: %s", err.Error())
+	}
+
+	fmt.Printf("Content-Length: %d \n", resp.ContentLength)
+
 	log.Printf("Serving request: %s", r.URL.Path)
 	host, _ := os.Hostname()
 	fmt.Fprintf(w, "Hola, Goodjob dice que el valor que necesitas es: !\n")
 	fmt.Fprintf(w, "FICHERO: %s!\n", fichero)
+	fmt.Fprintf(w, "FICHERO content-Length: %d \n", resp.ContentLength)
 	fmt.Fprintf(w, "Version: 6.6.6\n")
 	fmt.Fprintf(w, "Hostname: %s\n", host)
 }
