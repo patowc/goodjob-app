@@ -40,7 +40,7 @@ func hello(w http.ResponseWriter, r *http.Request) {
 
 	fichero := parm_list[0]
 
-	httpClient := &http.Client{Timeout: 5000}
+	httpClient := &http.Client{}
 	resp, err := httpClient.Head(fichero)
 
 	if err != nil {
