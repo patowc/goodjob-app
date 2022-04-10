@@ -30,20 +30,20 @@ func main() {
 
 // hello responds to the request with a plain-text "Hello, world" message.
 func hello(w http.ResponseWriter, r *http.Request) {
-	parm_size, ok := r.URL.Query()["size"]
+	parm_list, ok := r.URL.Query()["fichero"]
 
-        if !ok || len(parm_size[0]) < 1 {
-		log.Println("¡Necesitamos size como argumento de la llamada!")
-		fmt.Fprintf(w, "¡Necesitamos size como argumento de la llamada!\n")
+        if !ok || len(parm_list[0]) < 1 {
+		log.Println("¡Necesitamos fichero como argumento de la llamada!")
+		fmt.Fprintf(w, "¡Necesitamos fichero como argumento de la llamada!\n")
 		return
 	}
 
-	size := parm_size[0]
+	fichero := parm_list[0]
 
 	log.Printf("Serving request: %s", r.URL.Path)
 	host, _ := os.Hostname()
 	fmt.Fprintf(w, "Hola, Goodjob dice que el valor que necesitas es: !\n")
-	fmt.Fprintf(w, "SIZE: %s!\n", size)
+	fmt.Fprintf(w, "FICHERO: %s!\n", fichero)
 	fmt.Fprintf(w, "Version: 6.6.6\n")
 	fmt.Fprintf(w, "Hostname: %s\n", host)
 }
