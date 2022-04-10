@@ -40,8 +40,8 @@ func hello(w http.ResponseWriter, r *http.Request) {
 
 	fichero := parm_list[0]
 
-	httpClient := &http.Client{Timeout: 5 * time.Second}
-	resp, err := httpClient.Head(url)
+	httpClient := &http.Client{Timeout: 5000}
+	resp, err := httpClient.Head(fichero)
 
 	if err != nil {
 		log.Fatalf("error on HEAD request: %s", err.Error())
